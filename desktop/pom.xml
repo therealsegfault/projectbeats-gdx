@@ -44,9 +44,8 @@
   <build>
     <resources>
       <resource>
-        <directory>../assets</directory>
+        <directory>assets</directory>
         <filtering>false</filtering>
-        <targetPath>assets</targetPath>
       </resource>
     </resources>
 

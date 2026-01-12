@@ -10,9 +10,9 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.modrinth.therealsegfault.projectbeats.core.EngineConfig;
-import com.modrinth.therealsegfault.projectbeats.core.EngineCore;
-import com.modrinth.therealsegfault.projectbeats.core.Judgement;
+import io.github.therealsegfault.projectbeatsgdx.core.EngineConfig;
+import io.github.therealsegfault.projectbeatsgdx.core.EngineCore;
+import io.github.therealsegfault.projectbeatsgdx.core.Judgement;
 
 import java.util.Locale;
 import java.util.Random;
@@ -77,11 +77,12 @@ public final class DebugRhythmScreen extends ScreenAdapter {
     @Override
     public void show() {
         cam.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        cam.update();
         shapes = new ShapeRenderer();
 
         // Put an actual audio file in /assets/music/test.ogg (or change path).
         try {
-            music = Gdx.audio.newMusic(Gdx.files.internal("assets/music/test.ogg"));
+            music = Gdx.audio.newMusic(Gdx.files.internal("music/test.ogg"));
             music.setLooping(false);
             music.setVolume(0.9f);
         } catch (Exception e) {
