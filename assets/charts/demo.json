@@ -1,0 +1,25 @@
+{
+  "id": "demo",
+  "title": "Demo Chart",
+  "artist": "(replace me)",
+  "audio": "music/test.ogg",
+  "approachSeconds": 1.6,
+  "notes": [
+    { "t": 0.80, "lane": 0 },
+    { "t": 1.00, "lane": 1 },
+    { "t": 1.20, "lane": 2 },
+    { "t": 1.40, "lane": 3 },
+
+    { "t": 2.00, "lane": 0 },
+    { "t": 2.00, "lane": 2 },
+
+    { "t": 2.40, "lane": 1 },
+    { "t": 2.60, "lane": 3 },
+    { "t": 2.80, "lane": 0 },
+
+    { "t": 3.20, "lane": 0 },
+    { "t": 3.40, "lane": 1 },
+    { "t": 3.60, "lane": 2 },
+    { "t": 3.80, "lane": 3 }
+  ]
+}

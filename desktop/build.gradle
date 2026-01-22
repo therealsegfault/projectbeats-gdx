@@ -1,0 +1,55 @@
+plugins {
+  id 'application'
+  id 'java'
+}
+
+java {
+  toolchain {
+    languageVersion = JavaLanguageVersion.of(21)
+  }
+}
+
+tasks.withType(JavaCompile).configureEach {
+  options.release = 21
+  options.encoding = 'UTF-8'
+}
+
+application {
+  mainClass = 'io.github.therealsegfault.projectbeatsgdx.desktop.DesktopLauncher'
+}
+
+sourceSets {
+  main {
+    resources {
+      // Standard libGDX layout: root/assets contains music/, textures/, etc.
+      srcDir rootProject.file('assets')
+    }
+  }
+}
+
+// If assets end up coming from multiple places (common during refactors),
+// Gradle 9+ will fail unless we pick a duplicate strategy. For now we
+// want "first one wins" (EXCLUDE) so you can iterate without build breaks.
+tasks.named('processResources').configure {
+  duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+dependencies {
+  implementation project(':core')
+
+  implementation "com.badlogicgames.gdx:gdx-backend-lwjgl3:$gdxVersion"
+  implementation "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
+
+  // Simple logger so you see errors in the terminal.
+  implementation 'org.slf4j:slf4j-simple:2.0.16'
+}
+
+// Mac-only: LWJGL requires GLFW to run on the first thread.
+tasks.named('run', JavaExec).configure {
+  if (System.getProperty('os.name').toLowerCase().contains('mac')) {
+    jvmArgs '-XstartOnFirstThread'
+  }
+  // Makes relative file lookups behave (useful if you switch to Local files later)
+  workingDir = rootProject.projectDir
+}
+

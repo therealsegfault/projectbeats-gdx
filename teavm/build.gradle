@@ -1,0 +1,16 @@
+// TeaVM/web build is a planned feature.
+// This module is intentionally a stub right now so the multi-project structure stays stable.
+
+plugins {
+  id 'java'
+}
+
+java {
+  toolchain {
+    languageVersion = JavaLanguageVersion.of(21)
+  }
+}
+
+dependencies {
+  implementation project(':core')
+}

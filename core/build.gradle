@@ -1,0 +1,33 @@
+plugins {
+  id 'java-library'
+  id 'org.jetbrains.kotlin.jvm'
+}
+
+java {
+  toolchain {
+    languageVersion = JavaLanguageVersion.of(21)
+  }
+}
+
+kotlin {
+  jvmToolchain(21)
+}
+
+// Be explicit about Kotlin's bytecode target so builds behave consistently
+// across machines/Gradle versions.
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+  kotlinOptions {
+    jvmTarget = '21'
+    freeCompilerArgs += ['-Xjsr305=strict']
+  }
+}
+
+tasks.withType(JavaCompile).configureEach {
+  options.release = 21
+  options.encoding = 'UTF-8'
+}
+
+dependencies {
+  // Core is platform-agnostic; keep dependencies minimal.
+  api "com.badlogicgames.gdx:gdx:$gdxVersion"
+}
