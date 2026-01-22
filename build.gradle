@@ -1,0 +1,15 @@
+ext {
+  // Keep this centralized so upgrading libGDX is one edit.
+  gdxVersion = (findProperty('gdxVersion') ?: '1.12.1')
+}
+
+allprojects {
+  group = 'io.github.therealsegfault.projectbeatsgdx'
+  version = '0.1.0-SNAPSHOT'
+}
+
+subprojects {
+  repositories {
+    mavenCentral()
+  }
+}
