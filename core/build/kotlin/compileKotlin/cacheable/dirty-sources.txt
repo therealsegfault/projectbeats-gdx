@@ -1,0 +1,9 @@
+/Users/samuelpedestal/Maven Projects/gradle/GitHub/Untitled/projectbeats-gdx/core/src/main/kotlin/io/github/therealsegfault/projectbeatsgdx/core/Clock.kt
+/Users/samuelpedestal/Maven Projects/gradle/GitHub/Untitled/projectbeats-gdx/core/src/main/kotlin/io/github/therealsegfault/projectbeatsgdx/core/EngineConfig.kt
+/Users/samuelpedestal/Maven Projects/gradle/GitHub/Untitled/projectbeats-gdx/core/src/main/kotlin/io/github/therealsegfault/projectbeatsgdx/core/Lane.kt
+/Users/samuelpedestal/Maven Projects/gradle/GitHub/Untitled/projectbeats-gdx/core/src/main/kotlin/io/github/therealsegfault/projectbeatsgdx/core/NoteEvent.kt
+/Users/samuelpedestal/Maven Projects/gradle/GitHub/Untitled/projectbeats-gdx/core/src/main/kotlin/io/github/therealsegfault/projectbeatsgdx/core/Judgement.kt
+/Users/samuelpedestal/Maven Projects/gradle/GitHub/Untitled/projectbeats-gdx/core/src/main/kotlin/io/github/therealsegfault/projectbeatsgdx/core/EngineCore.kt
+/Users/samuelpedestal/Maven Projects/gradle/GitHub/Untitled/projectbeats-gdx/core/src/main/kotlin/io/github/therealsegfault/projectbeatsgdx/core/ScoreState.kt
+/Users/samuelpedestal/Maven Projects/gradle/GitHub/Untitled/projectbeats-gdx/core/src/main/kotlin/io/github/therealsegfault/projectbeatsgdx/core/HitWindows.kt
+/Users/samuelpedestal/Maven Projects/gradle/GitHub/Untitled/projectbeats-gdx/core/src/main/kotlin/io/github/therealsegfault/projectbeatsgdx/core/Difficulty.kt
