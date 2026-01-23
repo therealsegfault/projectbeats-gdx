@@ -14,9 +14,9 @@ object ChartToEngine {
 
         return sorted.mapIndexed { idx, n ->
             NoteEvent(
-                timeSeconds = n.timeSeconds.toLong(),
+                timeSeconds = n.timeSeconds.toDouble(),
                 lane = n.lane,
-                seq = idx
+                seq = idx.toLong()
             )
         }
     }
