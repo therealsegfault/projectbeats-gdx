@@ -17,3 +17,15 @@ class EngineConfig {
   var driftPenaltyPerMiss: Double = 1.0
   var driftDebtMultiplier: Double = 2.0
 }
+
+
+
+  fun getApproachTimeSeconds(): Double = approachTimeSeconds
+  fun getWindows(): HitWindows = windows
+  fun getMaxAlive(): Int = maxAlive
+  fun getMaxAlivePerLane(): Int = maxAlivePerLane
+  fun getSpawnLookaheadSeconds(): Double = spawnLookaheadSeconds
+  fun getMinNoteGapSeconds(): Double = minNoteGapSeconds
+  fun getLaneCount(): Int = lanes
+
+}

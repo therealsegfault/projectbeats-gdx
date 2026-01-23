@@ -150,3 +150,25 @@ class EngineCore(
     }
   }
 }
+
+
+
+data class LiveNoteView(
+    val lane: Int,
+    val timeSeconds: Double,
+    val spawnTimeSeconds: Double,
+    val approachSeconds: Double,
+    val judged: Boolean,
+    val judgement: Judgement?
+)
+
+fun notesSnapshot(): List<LiveNoteView> = notes.map {
+    LiveNoteView(
+        lane = it.lane,
+        timeSeconds = it.timeSeconds,
+        spawnTimeSeconds = it.spawnTimeSeconds,
+        approachSeconds = it.approachSeconds,
+        judged = it.judged,
+        judgement = it.judgement
+    )
+}

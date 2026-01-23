@@ -14,3 +14,12 @@ class ScoreState {
   var drift: Double = 0.0
   var driftDebt: Double = 0.0
 }
+
+
+
+  fun getScore(): Int = score
+  fun getCombo(): Int = combo
+  fun getDrift(): Double = drift
+  fun getDriftDebt(): Double = driftDebt
+
+}

@@ -83,7 +83,7 @@ public final class DebugRhythmScreen extends ScreenAdapter {
         cfg.minNoteGapSeconds = 0.22;
         cfg.maxAlive = 8;
         cfg.maxAlivePerLane = 1;
-        cfg.approachTimeSeconds = 2.8;
+        cfg.getApproachTimeSeconds() = 2.8;
     }
 
     @Override
@@ -182,12 +182,12 @@ public final class DebugRhythmScreen extends ScreenAdapter {
             loadedChart = ChartLoader.load("charts/demo.json");
 
             // Keep the engine "approach" difficulty-driven (not BPM-driven).
-            cfg.approachTimeSeconds = loadedChart.getApproachSeconds();
+            cfg.getApproachTimeSeconds() = loadedChart.getApproachSeconds();
             engine.reset();
 
             // Pre-spawn all notes. For big charts later, we can stream-spawn.
             for (var ev : ChartToEngine.toNoteEvents(loadedChart)) {
-                engine.spawnNote(ev.timeSeconds, ev.lane, cfg.approachTimeSeconds);
+                engine.spawnNote(ev.timeSeconds, ev.lane, cfg.getApproachTimeSeconds());
             }
 
             // Optional: if the chart points to a different audio file, prefer that.
@@ -325,7 +325,7 @@ public final class DebugRhythmScreen extends ScreenAdapter {
         float ny = (float)Math.sin(ang);
         float spawnDist = Math.max(w, h) * 0.70f;
 
-        for (EngineCore.LiveNote n : engine.notes()) {
+        for (EngineCore.LiveNote n : engine.notesSnapshot()) {
             if (n.judged) continue;
             if (t < n.spawnTimeSeconds) continue;
 
@@ -420,7 +420,7 @@ public final class DebugRhythmScreen extends ScreenAdapter {
         EngineCore.LiveNote best = null;
         float bestDist = Float.POSITIVE_INFINITY;
 
-        for (EngineCore.LiveNote n : engine.notes()) {
+        for (EngineCore.LiveNote n : engine.notesSnapshot()) {
             if (n.judged) continue;
             if (t < n.spawnTimeSeconds) continue;
             if (t > n.timeSeconds + cfg.windows.miss) continue;
