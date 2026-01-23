@@ -9,6 +9,16 @@ import kotlin.math.abs
  * - Time-based notes (absolute hitTime seconds)
  * - Earliest-hittable note per lane
  */
+
+data class LiveNoteView(
+  val lane: Int,
+  val timeSeconds: Double,
+  val spawnTimeSeconds: Double,
+  val approachSeconds: Double,
+  val judged: Boolean,
+  val judgement: Judgement?
+)
+
 class EngineCore(
   private val cfg: EngineConfig,
   seed: Long
@@ -148,5 +158,17 @@ class EngineCore(
         score.drift += cfg.driftPenaltyPerMiss * mult
       }
     }
+
+  fun notesSnapshot(): List<LiveNoteView> = notes.map {
+    LiveNoteView(
+      lane = it.lane,
+      timeSeconds = it.timeSeconds,
+      spawnTimeSeconds = it.spawnTimeSeconds,
+      approachSeconds = it.approachSeconds,
+      judged = it.judged,
+      judgement = it.judgement
+    )
+  }
+
   }
 }

@@ -6,6 +6,7 @@ import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
 import io.github.therealsegfault.projectbeatsgdx.core.chart.Chart;
 import io.github.therealsegfault.projectbeatsgdx.core.chart.ChartNote;
+import io.github.therealsegfault.projectbeatsgdx.core.chart.ChartNoteType;
 
 import java.util.ArrayList;
 import java.util.List;
