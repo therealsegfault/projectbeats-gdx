@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import io.github.therealsegfault.projectbeatsgdx.core.EngineConfig;
 import io.github.therealsegfault.projectbeatsgdx.core.EngineCore;
 import io.github.therealsegfault.projectbeatsgdx.core.HitWindows;
-import io.github.therealsegfault.projectbeatsgdx.core.chart.ChartNoteType;
+import io.github.therealsegfault.projectbeatsgdx.core.LiveNoteView;
 import io.github.therealsegfault.projectbeatsgdx.runtime.chart.ChartLoader;
 import io.github.therealsegfault.projectbeatsgdx.core.chart.Chart;
 import io.github.therealsegfault.projectbeatsgdx.core.chart.ChartNote;
@@ -31,23 +31,20 @@ public class DebugRhythmScreen implements Screen {
         Chart loadedChart = ChartLoader.loadInternal("charts/demo.json");
 
         EngineConfig cfg = new EngineConfig(
-                loadedChart.getLaneCount(),
-                loadedChart.getApproachSeconds(),
+                loadedChart.getLanes(),
+                loadedChart.getApproachTimeSeconds(),
                 1.5,
                 0.04,
                 128,
                 64,
-                HitWindows.Default()
+                new HitWindows(0.04, 0.08, 0.12, 0.16, 0.20)
         );
 
         engine = new EngineCore(cfg, System.currentTimeMillis());
 
         for (ChartNote note : loadedChart.getNotes()) {
-            engine.spawnNote(note.getTime(), note.getLane(), ChartNoteType.TAP);
+            engine.spawnNote(note.getLane(), note.getTimeSeconds());
         }
-
-        engine.start();
-        engine.end();
     }
 
     @Override
@@ -55,15 +52,17 @@ public class DebugRhythmScreen implements Screen {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        engine.update(System.currentTimeMillis() / 1000.0, delta);
+        double tNow = System.currentTimeMillis() / 1000.0;
+        engine.updateAutoMiss(tNow);
+        engine.cleanupJudged(tNow, 2.0);
 
         batch.begin();
-        for (EngineCore.LiveNote note : engine.notesSnapshot()) {
-            if (note.isJudged()) continue;
-            font.draw(batch, "Note " + note.lane, 100, 100 + note.lane * 20);
+        for (LiveNoteView note : engine.notesSnapshot()) {
+            if (note.getJudged()) continue;
+            font.draw(batch, "Note " + note.getLane(), 100, 100 + note.getLane() * 20);
         }
 
-        font.draw(batch, "Score: " + engine.getScore().score + " Combo: " + engine.getScore().combo, 10, 460);
+        font.draw(batch, "Score: " + engine.score().getScore() + " Combo: " + engine.score().getCombo(), 10, 460);
         batch.end();
     }
 

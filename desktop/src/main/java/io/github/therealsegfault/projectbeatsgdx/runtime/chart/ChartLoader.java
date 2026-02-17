@@ -29,16 +29,35 @@ public final class ChartLoader {
         String audio = root.getString("audio", "");
         float approachSeconds = root.getFloat("approachSeconds", 1.6f);
 
+        int lanes = 4;
+        if (root.has("lanes")) {
+            lanes = root.getInt("lanes");
+        } else {
+            int maxLane = -1;
+            JsonValue notesArr = root.get("notes");
+            if (notesArr != null) {
+                for (JsonValue n = notesArr.child; n != null; n = n.next) {
+                    int lane = n.getInt("lane");
+                    if (lane > maxLane) {
+                        maxLane = lane;
+                    }
+                }
+            }
+            if (maxLane >= 0) {
+                lanes = maxLane + 1;
+            }
+        }
+
         List<ChartNote> notes = new ArrayList<>();
         JsonValue notesArr = root.get("notes");
         if (notesArr != null) {
             for (JsonValue n = notesArr.child; n != null; n = n.next) {
                 float t = n.getFloat("t");
                 int lane = n.getInt("lane");
-                notes.add(new ChartNote(t, lane));
+                notes.add(new ChartNote(t, lane, ChartNoteType.TAP));
             }
         }
 
-        return new Chart(id, title, artist, audio, approachSeconds, notes);
+        return new Chart(id, title, artist, audio, approachSeconds, lanes, notes);
     }
 }

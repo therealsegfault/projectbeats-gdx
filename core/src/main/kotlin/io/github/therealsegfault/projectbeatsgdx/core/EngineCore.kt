@@ -140,24 +140,29 @@ class EngineCore(
         score.score += 300
         score.combo += 1
       }
+
       Judgement.COOL -> {
         score.score += 200
         score.combo += 1
       }
+
       Judgement.FINE -> {
         score.score += 100
         score.combo += 1
       }
+
       Judgement.SAD -> {
         score.score += 50
         score.combo = 0
       }
+
       Judgement.MISS -> {
         score.combo = 0
         val mult = if (score.driftDebt > 0.0) cfg.driftDebtMultiplier else 1.0
         score.drift += cfg.driftPenaltyPerMiss * mult
       }
     }
+  }
 
   fun notesSnapshot(): List<LiveNoteView> = notes.map {
     LiveNoteView(
@@ -168,7 +173,5 @@ class EngineCore(
       judged = it.judged,
       judgement = it.judgement
     )
-  }
-
   }
 }
